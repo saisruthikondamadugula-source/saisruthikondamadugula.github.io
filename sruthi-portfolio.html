@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sruthi Kondamadugula | Program Manager & Oracle EPM Consultant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAF7;
+  --bg-alt: #F3F1EC;
+  --bg-dark: #1C1E22;
+  --bg-darker: #15171A;
+  --sand: #DDD6CB;
+  --warm: #C8BBAD;
+  --stone: #8A7F73;
+  --slate: #5C564E;
+  --charcoal: #3A3632;
+  --deep: #252220;
+  --pm: #4A6670;
+  --pm-lt: #6B8D9A;
+  --pm-glow: rgba(74,102,112,0.08);
+  --epm: #7B6548;
+  --epm-lt: #A48A64;
+  --epm-glow: rgba(123,101,72,0.08);
+  --accent: var(--pm);
+  --accent-lt: var(--pm-lt);
+  --accent-glow: var(--pm-glow);
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'Outfit', -apple-system, sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:var(--sans);color:var(--charcoal);background:var(--bg);line-height:1.75;font-weight:300;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+
+/* ═══ ROLE TOGGLE (floating) ═══ */
+.role-wrap{position:fixed;bottom:28px;right:28px;z-index:200;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem}
+.role-hint{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--stone);font-weight:500;background:rgba(250,250,247,.92);padding:.25rem .65rem;border-radius:3px;backdrop-filter:blur(10px)}
+.role-bar{display:flex;background:var(--bg-dark);border-radius:40px;padding:4px;box-shadow:0 8px 32px rgba(0,0,0,.18)}
+.role-btn{padding:.6rem 1.3rem;font-family:var(--sans);font-size:.73rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;border:none;background:0 0;color:var(--stone);cursor:pointer;border-radius:36px;transition:all .35s;white-space:nowrap;position:relative;z-index:2}
+.role-btn.on{color:var(--bg)}
+.role-btn.on.is-pm{background:var(--pm)}
+.role-btn.on.is-epm{background:var(--epm)}
+
+/* ═══ NAV ═══ */
+nav{position:fixed;top:0;left:0;right:0;background:rgba(250,250,247,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);z-index:100;border-bottom:1px solid rgba(200,187,173,.25);transition:box-shadow .4s}
+nav.scrolled{box-shadow:0 4px 30px rgba(37,34,32,.05)}
+.nav-in{max-width:1140px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;height:66px}
+.nav-logo{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--deep);text-decoration:none;letter-spacing:-.02em}
+.nav-logo .dot{transition:color .4s}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--stone);font-size:.76rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;transition:width .3s,background .4s}
+.nav-links a:hover{color:var(--deep)}
+.nav-links a:hover::after{width:100%}
+.mob-tog{display:none;background:0 0;border:none;cursor:pointer;padding:8px}
+.mob-tog span{display:block;width:22px;height:1.5px;background:var(--charcoal);margin:5px 0;transition:.3s}
+
+/* ═══ HERO ═══ */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 2rem 80px;position:relative;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.12;transition:background .5s}
+.orb-1{top:-150px;right:-100px;width:500px;height:500px}
+.orb-2{bottom:-100px;left:-150px;width:450px;height:450px}
+.hero-inner{position:relative;z-index:1;max-width:780px}
+.hero-ey{font-size:.76rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.5rem;transition:color .4s;opacity:0;animation:fu .8s ease .2s forwards}
+.hero h1{font-family:var(--serif);font-size:clamp(2.5rem,5.5vw,3.9rem);font-weight:500;line-height:1.15;color:var(--deep);margin-bottom:1.5rem;letter-spacing:-.015em;opacity:0;animation:fu .8s ease .4s forwards}
+.hero h1 em{font-style:italic;transition:color .4s}
+.hero-sub{font-size:1.02rem;color:var(--slate);max-width:600px;margin:0 auto 2.5rem;line-height:1.85;opacity:0;animation:fu .8s ease .6s forwards}
+.hero-view{transition:opacity .45s,transform .45s}
+.hero-view.off{opacity:0;position:absolute;pointer-events:none;transform:translateY(12px)}
+.hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fu .8s ease .8s forwards}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;font-family:var(--sans);font-size:.8rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:3px;transition:all .35s;cursor:pointer}
+.btn-fill{color:var(--bg);border:1.5px solid transparent;transition:background .4s,transform .3s,box-shadow .3s}
+.btn-fill:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.12)}
+.btn-out{background:0 0;color:var(--charcoal);border:1.5px solid var(--warm)}
+.btn-out:hover{border-color:var(--charcoal);transform:translateY(-2px)}
+.scroll-ind{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);opacity:0;animation:fi 1s ease 1.2s forwards}
+.scroll-ln{width:1px;height:50px;background:linear-gradient(to bottom,var(--warm),transparent);margin:0 auto;position:relative;overflow:hidden}
+.scroll-ln::after{content:'';position:absolute;top:-50px;left:0;width:1px;height:50px;background:var(--pm);animation:sd 2s ease infinite}
+
+/* ═══ SECTIONS ═══ */
+section{padding:100px 2rem}
+.ctr{max-width:1140px;margin:0 auto}
+.s-lbl{font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.7rem;transition:color .4s}
+.s-ttl{font-family:var(--serif);font-size:clamp(1.9rem,3.5vw,2.6rem);font-weight:500;color:var(--deep);margin-bottom:.8rem;letter-spacing:-.015em;line-height:1.2}
+.s-div{width:45px;height:1.5px;margin-bottom:2.5rem;transition:background .4s}
+
+/* ═══ ABOUT ═══ */
+#about{background:var(--bg-alt)}
+.ab-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:4.5rem;align-items:start}
+.ab-txt p{margin-bottom:1.1rem;font-size:.94rem;color:var(--charcoal)}
+.met-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;margin-top:1rem}
+.met-card{background:var(--bg);padding:1.6rem 1.4rem;border-radius:4px;border:1px solid rgba(200,187,173,.25);transition:all .35s}
+.met-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(37,34,32,.05);border-color:var(--warm)}
+.met-num{font-family:var(--serif);font-size:1.9rem;font-weight:600;line-height:1;margin-bottom:.35rem;transition:color .4s}
+.met-lbl{font-size:.76rem;color:var(--stone);font-weight:400}
+.toggled{transition:opacity .4s,max-height .4s;overflow:hidden}
+.toggled.off{opacity:0;max-height:0;padding:0;margin:0;border:none}
+
+/* ═══ EXPERIENCE ═══ */
+.exp-panel{transition:opacity .45s,max-height .5s;overflow:hidden}
+.exp-panel.off{opacity:0;max-height:0;padding:0}
+.tl{position:relative;margin-top:1.5rem}
+.tl::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px}
+.tl-item{position:relative;padding-left:2.8rem;margin-bottom:3rem}
+.tl-item::before{content:'';position:absolute;left:-4px;top:8px;width:9px;height:9px;background:var(--bg);border-radius:50%;border:2px solid}
+.tl-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.5rem;margin-bottom:.2rem}
+.tl-client{font-family:var(--serif);font-size:1.4rem;font-weight:600;color:var(--deep)}
+.tl-date{font-size:.78rem;color:var(--stone);font-weight:500}
+.tl-role{font-size:.88rem;font-weight:500;margin-bottom:.2rem;transition:color .4s}
+.tl-ind{font-size:.76rem;color:var(--stone);margin-bottom:.8rem;font-style:italic}
+.tl-bul{list-style:none}
+.tl-bul li{position:relative;padding-left:1.1rem;margin-bottom:.55rem;font-size:.88rem;color:var(--charcoal);line-height:1.65}
+.tl-bul li::before{content:'';position:absolute;left:0;top:10px;width:5px;height:1px;background:var(--warm)}
+.mh{font-weight:600;transition:color .4s}
+
+/* ═══ CLIENTS ═══ */
+#clients{background:var(--bg-alt)}
+.cl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.8rem;margin-top:2rem}
+.cl-card{background:var(--bg);border:1px solid rgba(200,187,173,.2);border-radius:4px;padding:2.2rem 1.3rem;text-align:center;transition:all .35s}
+.cl-card:hover{transform:translateY(-4px);box-shadow:0 12px 35px rgba(37,34,32,.06);border-color:var(--warm)}
+.cl-ico{width:48px;height:48px;margin:0 auto 1rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.3rem;font-weight:700;transition:background .4s,color .4s}
+.cl-name{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--deep);margin-bottom:.25rem}
+.cl-type{font-size:.72rem;color:var(--stone);letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+.cl-role{font-size:.78rem;margin-top:.5rem;font-weight:500;transition:color .4s}
+
+/* ═══ SKILLS ═══ */
+.sk-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;margin-top:2rem}
+.sk-cat{background:var(--bg-alt);padding:1.8rem;border-radius:4px;border:1px solid rgba(200,187,173,.2);transition:all .35s}
+.sk-cat:hover{border-color:var(--warm);box-shadow:0 5px 20px rgba(37,34,32,.03)}
+.sk-cat-t{font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--deep);margin-bottom:.9rem;padding-bottom:.5rem;border-bottom:1px solid rgba(200,187,173,.3)}
+.sk-tags{display:flex;flex-wrap:wrap;gap:.45rem}
+.sk-tag{padding:.3rem .75rem;background:var(--bg);border:1px solid rgba(200,187,173,.25);border-radius:2px;font-size:.76rem;color:var(--charcoal);transition:all .25s}
+.sk-tag:hover{border-color:var(--warm)}
+.sk-panel{transition:opacity .4s,max-height .5s;overflow:hidden}
+.sk-panel.off{opacity:0;max-height:0;padding:0;margin:0}
+
+/* ═══ CERTIFICATIONS ═══ */
+#certs{background:var(--bg-alt)}
+.ce-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:2rem}
+.ce-card{background:var(--bg);padding:1.4rem;border-radius:4px;border:1px solid rgba(200,187,173,.2);transition:all .3s}
+.ce-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,34,32,.04)}
+.ce-iss{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem;transition:color .4s}
+.ce-name{font-size:.85rem;color:var(--deep);font-weight:500;line-height:1.4}
+
+/* ═══ EDUCATION ═══ */
+.ed-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;margin-top:2rem}
+.ed-card{background:var(--bg-alt);padding:2rem;border-radius:4px;border:1px solid rgba(200,187,173,.2);transition:all .35s}
+.ed-card:hover{border-color:var(--warm)}
+.ed-deg{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--deep);margin-bottom:.3rem}
+.ed-sch{font-size:.88rem;color:var(--slate);margin-bottom:.2rem}
+.ed-yr{font-size:.78rem;color:var(--stone)}
+
+/* ═══ AWARDS ═══ */
+#awards{background:var(--bg-alt)}
+.aw-flex{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:2rem}
+.aw-pill{padding:.7rem 1.5rem;background:var(--bg);border:1px solid rgba(200,187,173,.25);border-radius:3px;font-size:.85rem;color:var(--charcoal);transition:all .3s}
+.aw-pill:hover{border-color:var(--warm);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.04)}
+
+/* ═══ CONTACT ═══ */
+#contact{background:var(--bg-dark);color:var(--bg)}
+#contact .s-ttl{color:var(--bg)}
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:2rem}
+.ct-info p{color:var(--warm);font-size:.94rem;margin-bottom:2rem;line-height:1.85}
+.ct-det{display:flex;align-items:center;gap:1rem;margin-bottom:1.1rem}
+.ct-ico{width:38px;height:38px;border-radius:50%;background:rgba(200,187,173,.08);display:flex;align-items:center;justify-content:center;font-size:.82rem;color:var(--warm);flex-shrink:0}
+.ct-txt{font-size:.88rem;color:var(--sand)}
+.ct-txt a{color:var(--sand);text-decoration:none;transition:color .3s}
+.ct-txt a:hover{color:var(--bg)}
+.ct-form{display:flex;flex-direction:column;gap:1.1rem}
+.ct-form input,.ct-form textarea{width:100%;padding:.95rem 1.15rem;background:rgba(250,250,247,.05);border:1px solid rgba(200,187,173,.15);border-radius:3px;color:var(--bg);font-family:var(--sans);font-size:.88rem;font-weight:300;transition:all .3s;outline:none}
+.ct-form input::placeholder,.ct-form textarea::placeholder{color:var(--stone)}
+.ct-form input:focus,.ct-form textarea:focus{border-color:var(--warm);background:rgba(250,250,247,.08)}
+.ct-form textarea{resize:vertical;min-height:120px}
+.btn-send{align-self:flex-start;padding:.85rem 2.2rem;background:var(--bg);color:var(--deep);border:none;font-family:var(--sans);font-size:.8rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;border-radius:3px;cursor:pointer;transition:all .35s}
+.btn-send:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(250,250,247,.12)}
+
+/* ═══ FOOTER ═══ */
+footer{background:var(--bg-darker);padding:1.8rem;text-align:center;font-size:.75rem;color:var(--stone);letter-spacing:.03em}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fu{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fi{from{opacity:0}to{opacity:.6}}
+@keyframes sd{0%{transform:translateY(0)}100%{transform:translateY(100px)}}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.rv.vis{opacity:1;transform:translateY(0)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:960px){
+  .ab-grid{grid-template-columns:1fr;gap:2.5rem}
+  .cl-grid{grid-template-columns:repeat(2,1fr)}
+  .sk-grid{grid-template-columns:1fr}
+  .ce-grid{grid-template-columns:repeat(2,1fr)}
+  .ct-grid{grid-template-columns:1fr;gap:2.5rem}
+  .ed-grid{grid-template-columns:1fr}
+}
+@media(max-width:650px){
+  .nav-links{display:none}
+  .mob-tog{display:block}
+  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:66px;left:0;right:0;background:rgba(250,250,247,.98);padding:1.5rem 2rem;gap:1rem;border-bottom:1px solid var(--sand)}
+  .cl-grid{grid-template-columns:1fr 1fr}
+  .ce-grid{grid-template-columns:1fr}
+  section{padding:70px 1.5rem}
+  .hero{padding-top:100px}
+  .role-wrap{bottom:14px;right:14px}
+}
+</style>
+</head>
+<body>
+
+<!-- ROLE TOGGLE -->
+<div class="role-wrap">
+  <div class="role-hint">Viewing as</div>
+  <div class="role-bar">
+    <button class="role-btn is-pm on" onclick="setRole('pm')">Program Manager</button>
+    <button class="role-btn is-epm" onclick="setRole('epm')">EPM Consultant</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="nb">
+  <div class="nav-in">
+    <a href="#" class="nav-logo">Sruthi<span class="dot" style="color:var(--pm)">.</span></a>
+    <ul class="nav-links" id="nv">
+      <li><a href="#about">About</a></li>
+      <li><a href="#exp">Experience</a></li>
+      <li><a href="#clients">Clients</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certs">Credentials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="mob-tog" onclick="document.getElementById('nv').classList.toggle('open')"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="orb orb-1" id="o1" style="background:var(--pm)"></div>
+  <div class="orb orb-2" id="o2" style="background:var(--pm-lt)"></div>
+  <div class="hero-inner">
+    <div class="hero-view" id="hPm">
+      <p class="hero-ey" style="color:var(--pm)">Technical Program Manager &middot; PMP &middot; CSPO</p>
+      <h1>Driving <em style="color:var(--pm)">Strategic Programs</em> from Vision to Delivery</h1>
+      <p class="hero-sub">10+ years leading complex, cross-functional programs for Fortune 500 clients. $15M+ in program value delivered through roadmap execution, process automation, and stakeholder alignment across global teams.</p>
+    </div>
+    <div class="hero-view off" id="hEpm">
+      <p class="hero-ey" style="color:var(--epm)">Oracle EPM Consultant &middot; Application Lead</p>
+      <h1>Architecting <em style="color:var(--epm)">Financial Intelligence</em> for the Enterprise</h1>
+      <p class="hero-sub">10+ years delivering 13+ Oracle EPM implementations across Cloud and On-Premise — transforming how global organizations plan, budget, forecast, and report.</p>
+    </div>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-fill" id="hBtn" style="background:var(--pm)">Get in Touch</a>
+      <a href="#" class="btn btn-out" onclick="event.preventDefault();alert('Host your resume PDF and update this link. Options: Google Drive, Dropbox, or GitHub.')">Download Resume &darr;</a>
+    </div>
+  </div>
+  <div class="scroll-ind"><div class="scroll-ln"></div></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="ctr">
+    <div class="ab-grid">
+      <div class="ab-txt rv">
+        <p class="s-lbl acc-c" style="color:var(--pm)">About Me</p>
+        <h2 class="s-ttl">Where Technology Meets Business Impact</h2>
+        <div class="s-div acc-b" style="background:var(--pm)"></div>
+        <p>I bring a unique dual perspective — deep Oracle EPM technical expertise combined with strong program leadership and strategic thinking. Over 10+ years at Accenture, I've served Fortune 500 clients across Oil &amp; Gas, Energy, FMCG, and Food &amp; Beverage.</p>
+        <p>Whether leading enterprise-scale modernization programs or architecting Oracle Cloud EPM solutions from the ground up, I focus on translating complex business needs into measurable outcomes — on time, on budget, and with lasting impact.</p>
+        <p>I hold PMP, CSPO, and CSM certifications, an Executive Management Program from IIM Calcutta, and multiple Oracle Cloud certifications. Based in Seattle, WA and open to opportunities nationwide.</p>
+      </div>
+      <div class="met-grid rv">
+        <div class="met-card"><div class="met-num acc-c" style="color:var(--pm)">10+</div><div class="met-lbl">Years of Experience</div></div>
+        <div class="met-card"><div class="met-num acc-c" style="color:var(--pm)">$5M+</div><div class="met-lbl">Annual Cost Savings</div></div>
+        <div class="met-card toggled pm-only" id="pm-m1"><div class="met-num" style="color:var(--pm)">$15M+</div><div class="met-lbl">Program Revenue Managed</div></div>
+        <div class="met-card toggled pm-only" id="pm-m2"><div class="met-num" style="color:var(--pm)">10+</div><div class="met-lbl">Global Projects in Portfolio</div></div>
+        <div class="met-card toggled epm-only off" id="epm-m1"><div class="met-num" style="color:var(--epm)">13+</div><div class="met-lbl">EPM Implementations</div></div>
+        <div class="met-card toggled epm-only off" id="epm-m2"><div class="met-num" style="color:var(--epm)">1,200+</div><div class="met-lbl">Manual Hours Eliminated/Yr</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="exp">
+  <div class="ctr">
+    <p class="s-lbl rv acc-c" style="color:var(--pm)">Career Journey</p>
+    <h2 class="s-ttl rv">Professional Experience</h2>
+    <div class="s-div rv acc-b" style="background:var(--pm)"></div>
+    <p class="rv" style="font-size:.9rem;color:var(--slate);margin-bottom:.5rem;font-style:italic">Accenture &middot; Jul 2015 – Dec 2025 &middot; Consultant → Senior Consultant → Application Lead</p>
+
+    <!-- PM EXPERIENCE -->
+    <div class="exp-panel" id="xPm">
+      <div class="tl">
+        <div class="tl-item rv">
+          <div class="tl-head"><span class="tl-client">Halliburton & Wendy's</span><span class="tl-date">2023 — 2025</span></div>
+          <div class="tl-role" style="color:var(--pm)">Technical Program Manager / Application Lead</div>
+          <div class="tl-ind">Oil & Gas · Food & Beverage · Remote, Seattle · Team of 8+ Engineers</div>
+          <ul class="tl-bul">
+            <li>Led end-to-end delivery of large-scale platform modernization programs, managing dependencies, timelines, and deliverables across engineering, product, and business stakeholder teams</li>
+            <li>Developed and owned <span class="mh" style="color:var(--pm)">program roadmaps for 10+ global projects</span> generating $15M+ in revenue; tracked milestones, RAID logs, and KPI dashboards for executive reporting</li>
+            <li>Drove platform migration to Azure/OCI, delivering <span class="mh" style="color:var(--pm)">35% faster transactions</span> and <span class="mh" style="color:var(--pm)">$5M annual cost savings</span></li>
+            <li>Established governance frameworks — change control, dependency management, and program management rigor across concurrent initiatives</li>
+            <li>Directed <span class="mh" style="color:var(--pm)">DevOps/CI/CD adoption</span>, reducing deployment time by 50% and saving ~2,000 engineering hours annually</li>
+            <li>Championed reporting simplification achieving <span class="mh" style="color:var(--pm)">58% operational cost reduction</span> — recognized with Accenture ACE Award</li>
+          </ul>
+        </div>
+        <div class="tl-item rv">
+          <div class="tl-head"><span class="tl-client">Mondelez International</span><span class="tl-date">2018 — 2023</span></div>
+          <div class="tl-role" style="color:var(--pm)">Program Lead</div>
+          <div class="tl-ind">FMCG · Chicago · Global Teams</div>
+          <ul class="tl-bul">
+            <li>Spearheaded process improvement and automation for Sales and Financial systems, reducing data load times by <span class="mh" style="color:var(--pm)">30%</span> and enhancing month-end reporting reliability</li>
+            <li>Achieved top-box <span class="mh" style="color:var(--pm)">4/4 CSAT rating</span> through effective communication, timely delivery, and quality outputs</li>
+            <li>Drove DevOps adoption reducing deployment time by <span class="mh" style="color:var(--pm)">50%</span>; saved ~2,000 engineering hours annually through optimized practices</li>
+            <li>Maintained 100% compliance with status reporting across all leadership and stakeholders</li>
+            <li>Served as subject matter expert, providing solutions and best practices across global teams</li>
+          </ul>
+        </div>
+        <div class="tl-item rv">
+          <div class="tl-head"><span class="tl-client">Vistra Energy</span><span class="tl-date">2015 — 2018</span></div>
+          <div class="tl-role" style="color:var(--pm)">Technical Consultant</div>
+          <div class="tl-ind">Energy · Texas · Team of 4 Developers</div>
+          <ul class="tl-bul">
+            <li>Developed financial reporting dashboards improving data processing efficiency by <span class="mh" style="color:var(--pm)">25%</span></li>
+            <li>Led team of 4 developers enhancing financial applications and reporting capabilities for Oil &amp; Gas client</li>
+            <li>Delivered analytics solutions improving operational transparency and business performance measurement</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- EPM EXPERIENCE -->
+    <div class="exp-panel off" id="xEpm">
+      <div class="tl">
+        <div class="tl-item rv">
+          <div class="tl-head"><span class="tl-client">Halliburton</span><span class="tl-date">2023 — 2025</span></div>
+          <div class="tl-role" style="color:var(--epm)">Application Hyperion Lead</div>
+          <div class="tl-ind">Oil & Gas · Houston, TX · Remote from Seattle</div>
+          <ul class="tl-bul">
+            <li>Led solution redesign of On-Premise Hyperion (Planning, Essbase ASO/BSO) while expanding Cloud EPM modules (EPBCS, Smart Push) — <span class="mh" style="color:var(--epm)">35% performance improvement</span>, <span class="mh" style="color:var(--epm)">$5M annual savings</span></li>
+            <li>Deployed EPBCS for Financial, Workforce, and Capex planning; optimized calc-scripts achieving <span class="mh" style="color:var(--epm)">60% faster transactions</span></li>
+            <li>Directed multi-version Hyperion upgrades with DR strategy, performance tuning, DevOps/CI/CD — saving <span class="mh" style="color:var(--epm)">~2,000 engineering hours</span></li>
+            <li>Architected ETL processes using Informatica, ODI, MaxL for source-to-Hyperion data integration</li>
+          </ul>
+        </div>
+        <div class="tl-item rv">
+          <div class="tl-head"><span class="tl-client">Wendy's</span><span class="tl-date">2023 — 2025</span></div>
+          <div class="tl-role" style="color:var(--epm)">Application Lead</div>
+          <div class="tl-ind">Food & Beverage · USA</div>
+          <ul class="tl-bul">
+            <li>Implemented EPBCS Planning modules for budgeting and forecasting across the restaurant network</li>
+            <li>Automated EPM operations via EPM Automate — eliminating <span class="mh" style="color:var(--epm)">1,200+ manual hours annually</span>, improving release stability by 30%</li>
+          </ul>
+        </div>
+        <div class="tl-item rv">
+          <div class="tl-head"><span class="tl-client">Mondelez International</span><span class="tl-date">2018 — 2023</span></div>
+          <div class="tl-role" style="color:var(--epm)">Senior Consultant</div>
+          <div class="tl-ind">FMCG · Chicago · Multi-geography Financial Planning</div>
+          <ul class="tl-bul">
+            <li>Led Cloud migration to PBCS; architected <span class="mh" style="color:var(--epm)">ACB (Actual vs Budget Cost Tracker)</span> — reducing reconciliation by ~40%, improving forecast accuracy by 20%</li>
+            <li>Developed <span class="mh" style="color:var(--epm)">CMT (Cost Management Tool)</span> on EPBCS — granular cost visibility, budgeting cycle time reduced by 20%</li>
+            <li>Engineered data integration pipelines (Oracle ERP Cloud, PeopleSoft, Fusion) — <span class="mh" style="color:var(--epm)">45% data load reliability improvement</span></li>
+            <li>Authored MDX, Calc Scripts, Business Rules, Jython, Groovy — <span class="mh" style="color:var(--epm)">30% faster load times</span>, 25% processing efficiency gain</li>
+          </ul>
+        </div>
+        <div class="tl-item rv">
+          <div class="tl-head"><span class="tl-client">Vistra Energy</span><span class="tl-date">2015 — 2018</span></div>
+          <div class="tl-role" style="color:var(--epm)">Consultant</div>
+          <div class="tl-ind">Energy · Texas · On-Premise EPM Modernization</div>
+          <ul class="tl-bul">
+            <li>Modernized legacy On-Premise EPM through full redesign, DR strategies, LCM management — reducing manual processing by <span class="mh" style="color:var(--epm)">~30%</span></li>
+            <li>Executed full SDLC: requirements, design, development, UAT, go-live across Hyperion environments</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section id="clients">
+  <div class="ctr">
+    <p class="s-lbl rv acc-c" style="color:var(--pm)">Trusted By</p>
+    <h2 class="s-ttl rv">Fortune 500 Clients</h2>
+    <div class="s-div rv acc-b" style="background:var(--pm)"></div>
+    <div class="cl-grid">
+      <div class="cl-card rv">
+        <div class="cl-ico acc-ico" style="background:var(--pm-glow);color:var(--pm)">H</div>
+        <div class="cl-name">Halliburton</div><div class="cl-type">Oil &amp; Gas</div>
+        <div class="cl-role acc-c cl-r" style="color:var(--pm)">Application Lead</div>
+      </div>
+      <div class="cl-card rv">
+        <div class="cl-ico acc-ico" style="background:var(--pm-glow);color:var(--pm)">M</div>
+        <div class="cl-name">Mondelez</div><div class="cl-type">FMCG</div>
+        <div class="cl-role acc-c cl-r" style="color:var(--pm)">Program Lead</div>
+      </div>
+      <div class="cl-card rv">
+        <div class="cl-ico acc-ico" style="background:var(--pm-glow);color:var(--pm)">V</div>
+        <div class="cl-name">Vistra Energy</div><div class="cl-type">Energy</div>
+        <div class="cl-role acc-c cl-r" style="color:var(--pm)">Technical Consultant</div>
+      </div>
+      <div class="cl-card rv">
+        <div class="cl-ico acc-ico" style="background:var(--pm-glow);color:var(--pm)">W</div>
+        <div class="cl-name">Wendy's</div><div class="cl-type">Food &amp; Beverage</div>
+        <div class="cl-role acc-c cl-r" style="color:var(--pm)">Application Lead</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="ctr">
+    <p class="s-lbl rv acc-c" style="color:var(--pm)">Expertise</p>
+    <h2 class="s-ttl rv">Technical Skills</h2>
+    <div class="s-div rv acc-b" style="background:var(--pm)"></div>
+
+    <!-- PM Skills -->
+    <div class="sk-panel" id="skPm">
+      <div class="sk-grid">
+        <div class="sk-cat rv"><div class="sk-cat-t">Program & Delivery</div><div class="sk-tags">
+          <span class="sk-tag">Roadmap Planning</span><span class="sk-tag">Stakeholder Alignment</span><span class="sk-tag">Risk & Dependency Mgmt</span><span class="sk-tag">RAID Logs</span><span class="sk-tag">Governance</span><span class="sk-tag">Change Management</span><span class="sk-tag">Budget Tracking</span><span class="sk-tag">KPI Dashboards</span><span class="sk-tag">Release Management</span>
+        </div></div>
+        <div class="sk-cat rv"><div class="sk-cat-t">Technical Platforms</div><div class="sk-tags">
+          <span class="sk-tag">Azure</span><span class="sk-tag">Oracle Cloud (OCI)</span><span class="sk-tag">Oracle EPM / Hyperion</span><span class="sk-tag">CI/CD</span><span class="sk-tag">DevOps</span><span class="sk-tag">Data Integration</span><span class="sk-tag">Cloud Migration</span>
+        </div></div>
+        <div class="sk-cat rv"><div class="sk-cat-t">Tools</div><div class="sk-tags">
+          <span class="sk-tag">JIRA</span><span class="sk-tag">Azure DevOps</span><span class="sk-tag">Confluence</span><span class="sk-tag">MS Project</span><span class="sk-tag">Smartsheet</span><span class="sk-tag">Advanced Excel</span><span class="sk-tag">Power BI</span><span class="sk-tag">SQL</span><span class="sk-tag">PowerPoint</span>
+        </div></div>
+        <div class="sk-cat rv"><div class="sk-cat-t">Methodologies</div><div class="sk-tags">
+          <span class="sk-tag">Agile / Scrum</span><span class="sk-tag">SAFe</span><span class="sk-tag">SDLC</span><span class="sk-tag">ITIL</span><span class="sk-tag">Workflow Automation</span><span class="sk-tag">Sprint Planning</span><span class="sk-tag">Backlog Grooming</span>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- EPM Skills -->
+    <div class="sk-panel off" id="skEpm">
+      <div class="sk-grid">
+        <div class="sk-cat rv"><div class="sk-cat-t">Oracle Cloud EPM</div><div class="sk-tags">
+          <span class="sk-tag">PBCS</span><span class="sk-tag">EPBCS</span><span class="sk-tag">FCCS</span><span class="sk-tag">EPM Automate</span><span class="sk-tag">SmartView</span><span class="sk-tag">HFR</span><span class="sk-tag">Data Management</span><span class="sk-tag">Smart Push</span><span class="sk-tag">Management Reporting</span>
+        </div></div>
+        <div class="sk-cat rv"><div class="sk-cat-t">Oracle On-Premise</div><div class="sk-tags">
+          <span class="sk-tag">Hyperion Planning</span><span class="sk-tag">Essbase (ASO/BSO)</span><span class="sk-tag">FDMEE</span><span class="sk-tag">ODI</span><span class="sk-tag">DRM</span><span class="sk-tag">EPMA</span><span class="sk-tag">Calculation Manager</span><span class="sk-tag">LCM</span>
+        </div></div>
+        <div class="sk-cat rv"><div class="sk-cat-t">Scripting & Development</div><div class="sk-tags">
+          <span class="sk-tag">MDX</span><span class="sk-tag">Groovy</span><span class="sk-tag">Jython</span><span class="sk-tag">MaxL</span><span class="sk-tag">Calc Scripts</span><span class="sk-tag">Business Rules</span><span class="sk-tag">Shell Scripts</span><span class="sk-tag">SQL</span><span class="sk-tag">PL/SQL</span>
+        </div></div>
+        <div class="sk-cat rv"><div class="sk-cat-t">Data Integration & Cloud</div><div class="sk-tags">
+          <span class="sk-tag">Oracle ERP Cloud</span><span class="sk-tag">Fusion Apps</span><span class="sk-tag">PeopleSoft</span><span class="sk-tag">Informatica</span><span class="sk-tag">OCI</span><span class="sk-tag">Azure</span><span class="sk-tag">Power BI</span><span class="sk-tag">Tableau</span>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="ctr">
+    <p class="s-lbl rv acc-c" style="color:var(--pm)">Credentials</p>
+    <h2 class="s-ttl rv">Certifications & Education</h2>
+    <div class="s-div rv acc-b" style="background:var(--pm)"></div>
+    <div class="ce-grid">
+      <div class="ce-card rv"><div class="ce-iss acc-c" style="color:var(--pm)">PMI</div><div class="ce-name">PMP Certified Project Manager</div></div>
+      <div class="ce-card rv"><div class="ce-iss acc-c" style="color:var(--pm)">Scrum Alliance</div><div class="ce-name">Certified Scrum Product Owner</div></div>
+      <div class="ce-card rv"><div class="ce-iss acc-c" style="color:var(--pm)">Scrum Alliance</div><div class="ce-name">Certified Scrum Master</div></div>
+      <div class="ce-card rv"><div class="ce-iss acc-c" style="color:var(--pm)">Oracle</div><div class="ce-name">Cloud Planning Implementation Specialist (2024)</div></div>
+      <div class="ce-card rv"><div class="ce-iss acc-c" style="color:var(--pm)">Oracle</div><div class="ce-name">OCI Foundations Certified Associate</div></div>
+      <div class="ce-card rv"><div class="ce-iss acc-c" style="color:var(--pm)">Oracle</div><div class="ce-name">Essbase 11 Essentials</div></div>
+      <div class="ce-card rv"><div class="ce-iss acc-c" style="color:var(--pm)">AXELOS</div><div class="ce-name">ITIL v4 Foundation</div></div>
+      <div class="ce-card rv"><div class="ce-iss acc-c" style="color:var(--pm)">Microsoft</div><div class="ce-name">Azure Fundamentals</div></div>
+      <div class="ce-card rv"><div class="ce-iss acc-c" style="color:var(--pm)">ISB</div><div class="ce-name">Business Analysis Foundation</div></div>
+    </div>
+    <div style="margin-top:3rem">
+      <p class="s-lbl rv acc-c" style="color:var(--pm)">Education</p>
+      <div class="ed-grid">
+        <div class="ed-card rv"><div class="ed-deg">Executive General Management Program</div><div class="ed-sch">Indian Institute of Management Calcutta (IIMC)</div><div class="ed-yr">2021 — 2022</div></div>
+        <div class="ed-card rv"><div class="ed-deg">Bachelor of Technology — EEE</div><div class="ed-sch">JNTUH, Hyderabad · GPA: 3.7/4.0</div><div class="ed-yr">2011 — 2015</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="ctr">
+    <p class="s-lbl rv acc-c" style="color:var(--pm)">Recognition</p>
+    <h2 class="s-ttl rv">Awards</h2>
+    <div class="s-div rv acc-b" style="background:var(--pm)"></div>
+    <div class="aw-flex">
+      <div class="aw-pill rv">Accenture Excellence (ACE) Award</div>
+      <div class="aw-pill rv">Accenture Tech Star</div>
+      <div class="aw-pill rv">Mondelez Bravo Award</div>
+      <div class="aw-pill rv">TechStar Mentor</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="ctr">
+    <div class="ct-grid">
+      <div class="ct-info rv">
+        <p class="s-lbl" style="color:var(--warm)">Get in Touch</p>
+        <h2 class="s-ttl">Let's Work Together</h2>
+        <div class="s-div" style="background:var(--stone)"></div>
+        <p>I'm open to roles as a Technical Program Manager or Oracle EPM Consultant — consulting, contract, or full-time. Let's connect and discuss how I can drive impact for your organization.</p>
+        <div class="ct-det"><div class="ct-ico">&#9993;</div><div class="ct-txt"><a href="mailto:saisruthikondamadugula@gmail.com">saisruthikondamadugula@gmail.com</a></div></div>
+        <div class="ct-det"><div class="ct-ico">&#9742;</div><div class="ct-txt"><a href="tel:+12065965353">(206) 596-5353</a></div></div>
+        <div class="ct-det"><div class="ct-ico">&#9901;</div><div class="ct-txt"><a href="https://linkedin.com/in/saisruthikondamadugula" target="_blank">linkedin.com/in/saisruthikondamadugula</a></div></div>
+        <div class="ct-det"><div class="ct-ico">&#9873;</div><div class="ct-txt">Seattle, WA · Open to relocation</div></div>
+      </div>
+      <div class="rv">
+        <div class="ct-form">
+          <input type="text" placeholder="Your Name" id="fn">
+          <input type="email" placeholder="Your Email" id="fe">
+          <input type="text" placeholder="Subject" id="fs">
+          <textarea placeholder="Your Message" id="fm"></textarea>
+          <button class="btn-send" onclick="sendMail()">Send Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><p>&copy; 2025 Sruthi Kondamadugula &middot; Program Manager & Oracle EPM Consultant</p></footer>
+
+<script>
+const pmRoles=['Application Lead','Program Lead','Technical Consultant','Application Lead'];
+const epmRoles=['Hyperion Lead','Senior Consultant','Consultant','Application Lead'];
+
+function setRole(r){
+  const isPm=r==='pm';
+  const c=isPm?'var(--pm)':'var(--epm)';
+  const g=isPm?'var(--pm-glow)':'var(--epm-glow)';
+  const bg=isPm?'var(--pm)':'var(--epm)';
+
+  // Buttons
+  document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('on'));
+  document.querySelector(`.role-btn.is-${r}`).classList.add('on');
+
+  // Hero
+  document.getElementById('hPm').classList.toggle('off',!isPm);
+  document.getElementById('hEpm').classList.toggle('off',isPm);
+  document.getElementById('o1').style.background=isPm?'var(--pm)':'var(--epm)';
+  document.getElementById('o2').style.background=isPm?'var(--pm-lt)':'var(--epm-lt)';
+  document.getElementById('hBtn').style.background=bg;
+
+  // Logo dot
+  document.querySelector('.dot').style.color=c;
+
+  // Accent colors (labels, dividers)
+  document.querySelectorAll('.acc-c').forEach(e=>e.style.color=c);
+  document.querySelectorAll('.acc-b').forEach(e=>e.style.background=c);
+  document.querySelectorAll('.nav-links a::after').forEach(()=>{});
+
+  // Metrics
+  document.querySelectorAll('.pm-only').forEach(e=>e.classList.toggle('off',!isPm));
+  document.querySelectorAll('.epm-only').forEach(e=>e.classList.toggle('off',isPm));
+
+  // Experience panels
+  document.getElementById('xPm').classList.toggle('off',!isPm);
+  document.getElementById('xEpm').classList.toggle('off',isPm);
+
+  // Skills panels
+  document.getElementById('skPm').classList.toggle('off',!isPm);
+  document.getElementById('skEpm').classList.toggle('off',isPm);
+
+  // Client icons & roles
+  document.querySelectorAll('.acc-ico').forEach(e=>{e.style.background=g;e.style.color=c});
+  document.querySelectorAll('.cl-r').forEach((e,i)=>{e.style.color=c;e.textContent=(isPm?pmRoles:epmRoles)[i]});
+
+  // Timeline accent via inline style trick
+  const tlColor=isPm?'var(--pm)':'var(--epm)';
+  document.querySelectorAll('.tl').forEach(t=>t.style.setProperty('--tl-c',tlColor));
+
+  // Re-observe reveals
+  document.querySelectorAll('.rv:not(.vis)').forEach(el=>obs.observe(el));
+}
+
+// Reveal observer
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});
+},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+// Nav scroll
+window.addEventListener('scroll',()=>{document.getElementById('nb').classList.toggle('scrolled',window.scrollY>50)});
+
+// Dynamic timeline styles
+const s=document.createElement('style');
+s.textContent=`
+.tl::before{background:linear-gradient(to bottom,var(--tl-c,var(--pm)),transparent)!important}
+.tl-item::before{border-color:var(--tl-c,var(--pm))!important}
+.nav-links a::after{background:var(--pm)}
+`;
+document.head.appendChild(s);
+
+// Mail
+function sendMail(){
+  const n=document.getElementById('fn').value,e=document.getElementById('fe').value;
+  const su=document.getElementById('fs').value||'Portfolio Contact',m=document.getElementById('fm').value;
+  if(!n||!e||!m){alert('Please fill in all required fields.');return}
+  window.location.href=`mailto:saisruthikondamadugula@gmail.com?subject=${encodeURIComponent(su+' - from '+n)}&body=${encodeURIComponent(m+'\n\nFrom: '+n+'\nEmail: '+e)}`;
+}
+
+// Mobile nav close on click
+document.querySelectorAll('.nav-links a').forEach(a=>{a.addEventListener('click',()=>document.getElementById('nv').classList.remove('open'))});
+</script>
+</body>
+</html>
