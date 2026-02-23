@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certifications & Education | Sruthi Kondamadugula</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ROLE TOGGLE -->
+<div class="role-wrap">
+  <div class="role-hint">Viewing as</div>
+  <div class="role-bar">
+    <button class="role-btn is-pm on" onclick="setRole('pm')">Program Manager</button>
+    <button class="role-btn is-epm" onclick="setRole('epm')">EPM Consultant</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="nb">
+  <div class="nav-in">
+    <a href="#" class="nav-logo">Sruthi<span class="dot" style="color:var(--pm)">.</span></a>
+    <ul class="nav-links" id="nv">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="certifications.html">Credentials</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <button class="mob-tog" onclick="document.getElementById('nv').classList.toggle('open')"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- CERTIFICATIONS CONTENT -->
+<section id="certs">
+  <div class="ctr">
+    <p class="s-lbl rv acc-c" style="color:var(--pm)">Credentials</p>
+    <h2 class="s-ttl rv">Certifications & Education</h2>
+    <div class="s-div rv acc-b" style="background:var(--pm)"></div>
+    <div class="ce-grid">
+      <div class="ce-card rv"><div class="ce-iss acc-c" style="color:var(--pm)">PMI</div><div class="ce-name">PMP Certified Project Manager</div></div>
+      <div class="ce-card rv"><div class="ce-iss acc-c" style="color:var(--pm)">Scrum Alliance</div><div class="ce-name">Certified Scrum Product Owner</div></div>
+      <div class="ce-card rv"><div class="ce-iss acc-c" style="color:var(--pm)">Scrum Alliance</div><div class="ce-name">Certified Scrum Master</div></div>
+      <div class="ce-card rv"><div class="ce-iss acc-c" style="color:var(--pm)">Oracle</div><div class="ce-name">Cloud Planning Implementation Specialist (2024)</div></div>
+      <div class="ce-card rv"><div class="ce-iss acc-c" style="color:var(--pm)">Oracle</div><div class="ce-name">OCI Foundations Certified Associate</div></div>
+      <div class="ce-card rv"><div class="ce-iss acc-c" style="color:var(--pm)">Oracle</div><div class="ce-name">Essbase 11 Essentials</div></div>
+      <div class="ce-card rv"><div class="ce-iss acc-c" style="color:var(--pm)">AXELOS</div><div class="ce-name">ITIL v4 Foundation</div></div>
+      <div class="ce-card rv"><div class="ce-iss acc-c" style="color:var(--pm)">Microsoft</div><div class="ce-name">Azure Fundamentals</div></div>
+      <div class="ce-card rv"><div class="ce-iss acc-c" style="color:var(--pm)">ISB</div><div class="ce-name">Business Analysis Foundation</div></div>
+    </div>
+    <div style="margin-top:3rem">
+      <p class="s-lbl rv acc-c" style="color:var(--pm)">Education</p>
+      <div class="ed-grid">
+        <div class="ed-card rv"><div class="ed-deg">Executive General Management Program</div><div class="ed-sch">Indian Institute of Management Calcutta (IIMC)</div><div class="ed-yr">2021 — 2022</div></div>
+        <div class="ed-card rv"><div class="ed-deg">Bachelor of Technology — EEE</div><div class="ed-sch">JNTUH, Hyderabad · GPA: 3.7/4.0</div><div class="ed-yr">2011 — 2015</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><p>&copy; 2025 Sruthi Kondamadugula &middot; Program Manager & Oracle EPM Consultant</p></footer>
+
+<script>
+// same script
+const pmRoles=['Application Lead','Program Lead','Technical Consultant','Application Lead'];
+const epmRoles=['Hyperion Lead','Senior Consultant','Consultant','Application Lead'];
+
+function setRole(r){
+  const isPm=r==='pm';
+  const c=isPm?'var(--pm)':'var(--epm)';
+  const g=isPm?'var(--pm-glow)':'var(--epm-glow)';
+  const bg=isPm?'var(--pm)':'var(--epm)';
+  document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('on'));
+  document.querySelector(`.role-btn.is-${r}`).classList.add('on');
+  if(document.getElementById('hPm')) document.getElementById('hPm').classList.toggle('off',!isPm);
+  if(document.getElementById('hEpm')) document.getElementById('hEpm').classList.toggle('off',isPm);
+  if(document.getElementById('o1')) document.getElementById('o1').style.background=isPm?'var(--pm)':'var(--epm)';
+  if(document.getElementById('o2')) document.getElementById('o2').style.background=isPm?'var(--pm-lt)':'var(--epm-lt)';
+  if(document.getElementById('hBtn')) document.getElementById('hBtn').style.background=bg;
+  document.querySelector('.dot').style.color=c;
+  document.querySelectorAll('.acc-c').forEach(e=>e.style.color=c);
+  document.querySelectorAll('.acc-b').forEach(e=>e.style.background=c);
+  document.querySelectorAll('.pm-only').forEach(e=>e.classList.toggle('off',!isPm));
+  document.querySelectorAll('.epm-only').forEach(e=>e.classList.toggle('off',isPm));
+  if(document.getElementById('xPm')) document.getElementById('xPm').classList.toggle('off',!isPm);
+  if(document.getElementById('xEpm')) document.getElementById('xEpm').classList.toggle('off',isPm);
+  if(document.getElementById('skPm')) document.getElementById('skPm').classList.toggle('off',!isPm);
+  if(document.getElementById('skEpm')) document.getElementById('skEpm').classList.toggle('off',isPm);
+  document.querySelectorAll('.acc-ico').forEach(e=>{e.style.background=g;e.style.color=c});
+  document.querySelectorAll('.cl-r').forEach((e,i)=>{e.style.color=c;e.textContent=(isPm?pmRoles:epmRoles)[i]});
+  const tlColor=isPm?'var(--pm)':'var(--epm)';
+  document.querySelectorAll('.tl').forEach(t=>t.style.setProperty('--tl-c',tlColor));
+  document.querySelectorAll('.rv:not(.vis)').forEach(el=>obs.observe(el));
+}
+
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});
+},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+window.addEventListener('scroll',()=>{document.getElementById('nb').classList.toggle('scrolled',window.scrollY>50)});
+const s=document.createElement('style');
+s.textContent=`
+.tl::before{background:linear-gradient(to bottom,var(--tl-c,var(--pm)),transparent)!important}
+.tl-item::before{border-color:var(--tl-c,var(--pm))!important}
+.nav-links a::after{background:var(--pm)}
+`;
+document.head.appendChild(s);
+function sendMail(){
+  const n=document.getElementById('fn')?document.getElementById('fn').value:'';
+  const e=document.getElementById('fe')?document.getElementById('fe').value:'';
+  const su=document.getElementById('fs')?document.getElementById('fs').value||'Portfolio Contact':'';
+  const m=document.getElementById('fm')?document.getElementById('fm').value:'';
+  if(!n||!e||!m){alert('Please fill in all required fields.');return}
+  window.location.href=`mailto:saisruthikondamadugula@gmail.com?subject=${encodeURIComponent(su+' - from '+n)}&body=${encodeURIComponent(m+'\n\nFrom: '+n+'\nEmail: '+e)}`;
+}
+document.querySelectorAll('.nav-links a').forEach(a=>{a.addEventListener('click',()=>document.getElementById('nv').classList.remove('open'))});
+</script>
+</body>
+</html>
