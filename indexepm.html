@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sruthi Kondamadugula — Oracle EPM Consultant</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --flame: #EF5350;
+      --amber: #FFB300;
+      --teal: #00BFA5;
+      --indigo: #7C4DFF;
+      --sky: #40C4FF;
+      --rose: #FF80AB;
+      --dark-0: #09090B;
+      --dark-1: #111114;
+      --dark-2: #18181B;
+      --dark-3: #1E1E22;
+      --surface: #232328;
+      --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(255,255,255,0.15);
+      --text-primary: #ECECEF;
+      --text-secondary: #A0A0AB;
+      --text-muted: #6B6B76;
+      --glass: rgba(255,255,255,0.04);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--dark-0);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10000;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      padding: 0.9rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      backdrop-filter: blur(24px) saturate(1.4);
+      background: rgba(9,9,11,0.72);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700;
+      background: linear-gradient(135deg, var(--flame), var(--amber));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 1.6rem; align-items: center; }
+    .nav-links a {
+      color: var(--text-muted); text-decoration: none; font-size: 0.78rem;
+      font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-home {
+      padding: 0.4rem 1rem; border: 1px solid var(--border);
+      border-radius: 100px; font-size: 0.75rem !important; transition: all 0.25s !important;
+    }
+    .nav-home:hover { border-color: var(--flame) !important; color: var(--flame) !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      position: relative; padding: 7rem 2rem 4rem; overflow: hidden;
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(239,83,80,0.12), transparent),
+                  radial-gradient(ellipse 60% 50% at 80% 50%, rgba(0,191,165,0.08), transparent),
+                  radial-gradient(ellipse 50% 60% at 15% 80%, rgba(124,77,255,0.08), transparent),
+                  var(--dark-0);
+    }
+    .blob { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.18; animation: drift 12s ease-in-out infinite; }
+    .blob-1 { width: 500px; height: 500px; background: var(--flame); top: -15%; left: -8%; }
+    .blob-2 { width: 420px; height: 420px; background: var(--teal); bottom: -10%; right: -5%; animation-delay: -4s; }
+    .blob-3 { width: 300px; height: 300px; background: var(--indigo); top: 40%; right: 10%; animation-delay: -7s; }
+    .blob-4 { width: 260px; height: 260px; background: var(--amber); bottom: 15%; left: 15%; animation-delay: -2s; }
+    @keyframes drift {
+      0%, 100% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(15px,-20px) scale(1.04); }
+      66% { transform: translate(-10px,15px) scale(0.97); }
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                         linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent);
+    }
+    .hero-inner { max-width: 880px; text-align: center; position: relative; z-index: 2; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--amber); padding: 0.45rem 1.3rem; border-radius: 100px;
+      background: rgba(255,179,0,0.08); border: 1px solid rgba(255,179,0,0.2);
+      margin-bottom: 2rem; animation: fadeUp 0.7s ease both;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 7px; height: 7px; background: var(--amber); border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.35} }
+    .hero h1 {
+      font-family: 'Fraunces', serif; font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800; line-height: 1.12; color: #fff; margin-bottom: 1.4rem;
+      animation: fadeUp 0.7s ease 0.1s both;
+    }
+    .hero h1 .grad {
+      background: linear-gradient(135deg, var(--flame) 0%, var(--amber) 50%, var(--teal) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-desc {
+      font-size: 1.05rem; color: var(--text-secondary); max-width: 660px;
+      margin: 0 auto 2.5rem; font-weight: 300; line-height: 1.8;
+      animation: fadeUp 0.7s ease 0.2s both;
+    }
+    .hero-chips {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;
+      animation: fadeUp 0.7s ease 0.3s both;
+    }
+    .chip {
+      padding: 0.35rem 0.9rem; border-radius: 100px; font-size: 0.72rem;
+      font-weight: 500; letter-spacing: 0.4px; border: 1px solid;
+    }
+    .chip-flame  { color: var(--flame); border-color: rgba(239,83,80,0.25); background: rgba(239,83,80,0.06); }
+    .chip-teal   { color: var(--teal);  border-color: rgba(0,191,165,0.25); background: rgba(0,191,165,0.06); }
+    .chip-amber  { color: var(--amber); border-color: rgba(255,179,0,0.25); background: rgba(255,179,0,0.06); }
+    .chip-indigo { color: var(--indigo);border-color: rgba(124,77,255,0.25); background: rgba(124,77,255,0.06); }
+    .chip-sky    { color: var(--sky);   border-color: rgba(64,196,255,0.25); background: rgba(64,196,255,0.06); }
+    .chip-rose   { color: var(--rose);  border-color: rgba(255,128,171,0.25);background: rgba(255,128,171,0.06); }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+    /* IMPACT BANNER */
+    .impact-banner {
+      max-width: 1060px; margin: -2rem auto 0; padding: 3rem 2.5rem;
+      border-radius: 20px; background: var(--dark-2); border: 1px solid var(--border);
+      position: relative; z-index: 3;
+    }
+    .impact-banner::before {
+      content: ''; position: absolute; top: 0; left: 20%; right: 20%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--flame), var(--teal), transparent);
+    }
+    .impact-row {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 2rem; text-align: center;
+    }
+    .impact-num {
+      font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700; line-height: 1.1;
+    }
+    .impact-row > div:nth-child(1) .impact-num { color: var(--flame); }
+    .impact-row > div:nth-child(2) .impact-num { color: var(--teal); }
+    .impact-row > div:nth-child(3) .impact-num { color: var(--amber); }
+    .impact-row > div:nth-child(4) .impact-num { color: var(--indigo); }
+    .impact-row > div:nth-child(5) .impact-num { color: var(--sky); }
+    .impact-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+    /* SECTIONS */
+    .section { max-width: 1060px; margin: 0 auto; padding: 5rem 2rem; }
+    .sec-label {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 0.8rem;
+    }
+    .sec-label::before { content:''; width: 28px; height: 2px; border-radius: 2px; }
+    .sec-label.flame  { color: var(--flame); } .sec-label.flame::before  { background: var(--flame); }
+    .sec-label.teal   { color: var(--teal); }  .sec-label.teal::before   { background: var(--teal); }
+    .sec-label.amber  { color: var(--amber); } .sec-label.amber::before  { background: var(--amber); }
+    .sec-label.indigo { color: var(--indigo);} .sec-label.indigo::before { background: var(--indigo); }
+    .sec-label.sky    { color: var(--sky); }   .sec-label.sky::before    { background: var(--sky); }
+    .sec-title {
+      font-family: 'Fraunces', serif; font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 2.5rem;
+    }
+    .divider { max-width: 1060px; margin: 0 auto; padding: 0 2rem; }
+    .divider-line { height: 1px; background: linear-gradient(90deg, transparent, var(--border) 15%, var(--border) 85%, transparent); }
+
+    /* CASE STUDIES */
+    .case-study {
+      background: var(--dark-2); border: 1px solid var(--border); border-radius: 18px;
+      padding: 2.5rem; margin-bottom: 2rem; transition: border-color 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .case-study:hover { border-color: var(--border-hover); }
+    .case-study::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .case-study:nth-child(1)::before { background: linear-gradient(90deg, var(--flame), var(--amber)); }
+    .case-study:nth-child(2)::before { background: linear-gradient(90deg, var(--teal), var(--sky)); }
+    .case-study:nth-child(3)::before { background: linear-gradient(90deg, var(--indigo), var(--rose)); }
+    .case-study:nth-child(4)::before { background: linear-gradient(90deg, var(--amber), var(--teal)); }
+    .cs-header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.8rem; margin-bottom: 0.3rem; }
+    .cs-client { font-family: 'Fraunces', serif; font-size: 1.35rem; font-weight: 700; color: #fff; }
+    .cs-industry { font-size: 0.72rem; font-weight: 500; padding: 0.2rem 0.65rem; border-radius: 6px; background: rgba(255,255,255,0.05); color: var(--text-muted); }
+    .cs-meta { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1rem; font-style: italic; }
+    .cs-role { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 1.2rem; display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; }
+    .cs-role-badge { padding: 0.2rem 0.7rem; border-radius: 100px; font-size: 0.7rem; font-weight: 600; border: 1px solid var(--border); color: var(--text-muted); }
+    .cs-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .cs-bullets li { position: relative; padding-left: 1.3rem; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; }
+    .cs-bullets li::before { content: ''; position: absolute; left: 0; top: 0.6rem; width: 6px; height: 6px; border-radius: 50%; }
+    .case-study:nth-child(1) .cs-bullets li::before { background: var(--flame); }
+    .case-study:nth-child(2) .cs-bullets li::before { background: var(--teal); }
+    .case-study:nth-child(3) .cs-bullets li::before { background: var(--indigo); }
+    .case-study:nth-child(4) .cs-bullets li::before { background: var(--amber); }
+    .highlight { color: #fff; font-weight: 600; }
+    .cs-metrics { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px solid var(--border); }
+    .cs-metric { padding: 0.5rem 1rem; border-radius: 10px; background: var(--glass); border: 1px solid var(--border); font-size: 0.78rem; }
+    .cs-metric strong { display: block; font-size: 1.05rem; font-weight: 700; line-height: 1.2; }
+    .case-study:nth-child(1) .cs-metric strong { color: var(--flame); }
+    .case-study:nth-child(2) .cs-metric strong { color: var(--teal); }
+    .case-study:nth-child(3) .cs-metric strong { color: var(--indigo); }
+    .case-study:nth-child(4) .cs-metric strong { color: var(--amber); }
+    .cs-metric span { color: var(--text-muted); font-size: 0.7rem; }
+
+    /* SKILLS */
+    .skills-matrix { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1.2rem; }
+    .skill-block {
+      background: var(--dark-2); border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.6rem; transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .skill-block:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+    .skill-block::before { content:''; position: absolute; top:0; left:0; right:0; height: 2px; }
+    .skill-block:nth-child(1)::before { background: var(--flame); }
+    .skill-block:nth-child(2)::before { background: var(--teal); }
+    .skill-block:nth-child(3)::before { background: var(--indigo); }
+    .skill-block:nth-child(4)::before { background: var(--amber); }
+    .skill-block:nth-child(5)::before { background: var(--sky); }
+    .skill-block:nth-child(6)::before { background: var(--rose); }
+    .skill-block:nth-child(7)::before { background: linear-gradient(90deg, var(--teal), var(--indigo)); }
+    .sb-icon { font-size: 1.4rem; margin-bottom: 0.7rem; }
+    .sb-title { font-size: 0.82rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.7rem; }
+    .sb-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .sb-tag {
+      font-size: 0.68rem; padding: 0.22rem 0.6rem; border-radius: 6px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      color: var(--text-secondary); transition: border-color 0.2s;
+    }
+    .sb-tag:hover { border-color: var(--border-hover); }
+
+    /* CERTS */
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0.8rem; }
+    .cert-row {
+      display: flex; align-items: center; gap: 0.9rem; padding: 1rem 1.2rem;
+      border-radius: 12px; background: var(--dark-2); border: 1px solid var(--border); transition: all 0.25s;
+    }
+    .cert-row:hover { border-color: var(--border-hover); transform: translateX(3px); }
+    .cert-dot {
+      width: 36px; height: 36px; border-radius: 9px; display: flex;
+      align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;
+    }
+    .cert-dot.oracle { background: rgba(239,83,80,0.12); }
+    .cert-dot.pm     { background: rgba(255,179,0,0.12); }
+    .cert-dot.agile  { background: rgba(0,191,165,0.12); }
+    .cert-dot.cloud  { background: rgba(124,77,255,0.12); }
+    .cert-dot.other  { background: rgba(64,196,255,0.12); }
+    .cert-text h4 { font-size: 0.82rem; font-weight: 600; color: var(--text-primary); line-height: 1.3; }
+    .cert-text span { font-size: 0.68rem; color: var(--text-muted); }
+
+    /* AWARDS */
+    .awards-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+    .award-tile {
+      text-align: center; padding: 1.8rem 1.2rem; border-radius: 14px;
+      background: var(--dark-2); border: 1px solid var(--border); transition: all 0.3s;
+    }
+    .award-tile:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+    .award-emoji { font-size: 2rem; margin-bottom: 0.8rem; }
+    .award-tile h4 { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 0.3rem; }
+    .award-tile p { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* EDUCATION */
+    .edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 1.2rem; }
+    .edu-card {
+      padding: 1.8rem; border-radius: 14px; background: var(--dark-2);
+      border: 1px solid var(--border); transition: all 0.3s;
+    }
+    .edu-card:hover { border-color: var(--border-hover); }
+    .edu-card h4 { font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 0.3rem; }
+    .edu-card p { font-size: 0.82rem; color: var(--text-secondary); }
+    .edu-year {
+      display: inline-block; margin-top: 0.5rem; font-size: 0.7rem;
+      padding: 0.2rem 0.6rem; border-radius: 6px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--text-muted);
+    }
+
+    /* CTA */
+    .cta-section { max-width: 1060px; margin: 0 auto 3rem; padding: 0 2rem; }
+    .cta-box {
+      text-align: center; padding: 4rem 2rem; border-radius: 20px;
+      background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(239,83,80,0.08), transparent), var(--dark-2);
+      border: 1px solid var(--border);
+    }
+    .cta-box h2 { font-family: 'Fraunces', serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: #fff; margin-bottom: 1rem; }
+    .cta-box p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.8rem; }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.65rem 1.6rem;
+      border-radius: 100px; font-size: 0.82rem; font-weight: 600; text-decoration: none; transition: all 0.3s;
+    }
+    .cta-btn-primary { background: linear-gradient(135deg, var(--flame), var(--amber)); color: #fff; }
+    .cta-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(239,83,80,0.25); }
+    .cta-btn-outline { border: 1px solid var(--border); color: var(--text-secondary); background: transparent; }
+    .cta-btn-outline:hover { border-color: var(--text-secondary); color: #fff; }
+
+    footer { text-align: center; padding: 2.5rem 2rem; border-top: 1px solid var(--border); }
+    footer p { font-size: 0.72rem; color: var(--text-muted); }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: all 0.65s cubic-bezier(0.22, 1, 0.36, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      nav { padding: 0.8rem 1.2rem; }
+      .nav-links { gap: 0.8rem; }
+      .nav-links a { font-size: 0.68rem; }
+      .hero { padding: 5rem 1.2rem 3rem; }
+      .impact-banner { margin: -1rem 1rem 0; padding: 2rem 1.5rem; }
+      .section { padding: 3.5rem 1.2rem; }
+      .case-study { padding: 1.5rem; }
+      .skills-matrix, .cert-grid, .edu-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Sruthi K.</div>
+  <div class="nav-links">
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#certs">Certs</a>
+    <a href="#awards">Awards</a>
+    <a href="../index.html" class="nav-home">← Home</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Oracle EPM Consultant · 10+ Years</div>
+    <h1>Sruthi <span class="grad">Kondamadugula</span></h1>
+    <p class="hero-desc">
+      End-to-end Oracle EPM Cloud & Hyperion specialist delivering Planning, Budgeting, Forecasting, and Consolidation implementations for Fortune 500 clients — with 13+ implementations, $5M+ annual savings, 1,200+ automation hours, and 35–60% performance gains across Oil & Gas, Energy, FMCG, and Food & Beverage.
+    </p>
+    <div class="hero-chips">
+      <span class="chip chip-flame">PBCS / EPBCS</span>
+      <span class="chip chip-teal">Hyperion Planning</span>
+      <span class="chip chip-amber">Essbase ASO/BSO</span>
+      <span class="chip chip-indigo">FCCS · FDMEE</span>
+      <span class="chip chip-sky">ODI · Data Integration</span>
+      <span class="chip chip-rose">Cloud Migration</span>
+      <span class="chip chip-flame">Groovy · MDX</span>
+      <span class="chip chip-teal">OCI · Azure</span>
+      <span class="chip chip-amber">PMP · CSPO · CSM</span>
+    </div>
+  </div>
+</section>
+
+<div class="impact-banner reveal">
+  <div class="impact-row">
+    <div><div class="impact-num">13+</div><div class="impact-label">End-to-End Implementations</div></div>
+    <div><div class="impact-num">$5M</div><div class="impact-label">Annual Cost Savings</div></div>
+    <div><div class="impact-num">60%</div><div class="impact-label">Faster Transactions</div></div>
+    <div><div class="impact-num">1,200+</div><div class="impact-label">Hours Automated / Year</div></div>
+    <div><div class="impact-num">45%</div><div class="impact-label">Data Reliability Gain</div></div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="sec-label flame">Client Engagements</div>
+  <h2 class="sec-title">EPM Implementation<br>Case Studies</h2>
+
+  <div class="case-study reveal">
+    <div class="cs-header">
+      <span class="cs-client">Halliburton</span>
+      <span class="cs-industry">Oil & Gas · Texas</span>
+    </div>
+    <div class="cs-meta">Oracle EPM Cloud Planning Implementation & On-Premise Hyperion Modernization</div>
+    <div class="cs-role">Application Lead · Team of 8+ Engineers <span class="cs-role-badge">2023 – Dec 2025</span></div>
+    <ul class="cs-bullets">
+      <li>Led <span class="highlight">end-to-end Oracle EPM Planning implementation</span> and solution redesign of On-Premise Hyperion platform (Planning, Essbase ASO/BSO, Shared Services) while expanding Cloud EPM modules (EPBCS, Smart Push, Reporting Apps)</li>
+      <li>Designed and deployed <span class="highlight">EPBCS applications</span> for Financial, Workforce, and Capex planning — developed web-based data entry forms increasing user engagement by 20% and optimized calc-scripts achieving 60% faster transactions within 6 months</li>
+      <li>Served as <span class="highlight">primary client-facing liaison</span> for US-based Halliburton stakeholders in Texas, leading design sessions, UAT reviews, status updates — translating meeting outcomes into clear documentation shared with project teams and leadership</li>
+      <li>Directed multi-version <span class="highlight">Hyperion upgrades</span> with pre/post-upgrade validation, performance tuning, stabilization; designed DR and backup strategies ensuring business continuity</li>
+      <li>Architected <span class="highlight">ETL processes</span> using Informatica, ODI, and MaxL for source-to-Hyperion/Essbase data integration; championed DevOps/CI/CD adoption reducing deployment time by 50%</li>
+      <li>Managed <span class="highlight">project timelines, dependencies, and risks</span> across concurrent workstreams, translating complex business requirements into technical design specifications</li>
+    </ul>
+    <div class="cs-metrics">
+      <div class="cs-metric"><strong>35%</strong><span>Performance Improvement</span></div>
+      <div class="cs-metric"><strong>~$5M</strong><span>Annual Cost Savings</span></div>
+      <div class="cs-metric"><strong>60%</strong><span>Faster Transactions</span></div>
+      <div class="cs-metric"><strong>20%</strong><span>User Engagement ↑</span></div>
+      <div class="cs-metric"><strong>2,000 hrs</strong><span>Engineering Saved/Year</span></div>
+    </div>
+  </div>
+
+  <div class="case-study reveal">
+    <div class="cs-header">
+      <span class="cs-client">Wendy's</span>
+      <span class="cs-industry">Food & Beverage · USA</span>
+    </div>
+    <div class="cs-meta">Cloud EPM Planning Implementation for Restaurant Network</div>
+    <div class="cs-role">Application Lead · Team of 8+ Engineers <span class="cs-role-badge">2023 – 2025</span></div>
+    <ul class="cs-bullets">
+      <li>Developed and implemented <span class="highlight">EPBCS Planning modules</span> for budgeting and forecasting across Wendy's restaurant network, working directly with client stakeholders to gather requirements, configure solutions, and validate outputs</li>
+      <li>Automated critical EPM operations via <span class="highlight">EPM Automate</span> (daily backups, metadata/data loads, rule execution) — eliminating 1,200+ manual hours annually and improving release stability by 30%</li>
+      <li>Led and mentored cross-functional team of 8+ engineers, establishing <span class="highlight">standards, best practices, and knowledge management protocols</span></li>
+    </ul>
+    <div class="cs-metrics">
+      <div class="cs-metric"><strong>1,200+</strong><span>Hours Automated/Year</span></div>
+      <div class="cs-metric"><strong>30%</strong><span>Release Stability ↑</span></div>
+    </div>
+  </div>
+
+  <div class="case-study reveal">
+    <div class="cs-header">
+      <span class="cs-client">Mondelez International</span>
+      <span class="cs-industry">FMCG · Chicago</span>
+    </div>
+    <div class="cs-meta">Cloud & Hybrid EPM · Multi-Geography Financial Planning</div>
+    <div class="cs-role">Senior Consultant <span class="cs-role-badge">2018 – 2023</span></div>
+    <ul class="cs-bullets">
+      <li>Led <span class="highlight">Cloud migration to PBCS</span> and architected <span class="highlight">ACB (Actual vs. Budget Cost Tracker)</span> — transforming expense tracking for global finance teams across multiple geographies, reducing manual reconciliation by ~40% and improving forecast accuracy by 20%</li>
+      <li>Developed <span class="highlight">CMT (Cost Management Tool)</span> on EPBCS — analyzing complex business requirements and translating them into a scalable Planning solution providing granular cost visibility across Mondelez's entire portfolio</li>
+      <li>Engineered <span class="highlight">end-to-end data integration pipelines</span> connecting Oracle ERP Cloud, Fusion, PeopleSoft, and E-Business Suite to EPM using FDMEE & Data Management — increasing data load reliability by 45%</li>
+      <li>Authored complex <span class="highlight">MDX, Calculation Scripts, Business Rules, Jython, and Groovy</span> for advanced planning logic, custom allocations, and automated validations — improving load times by 30% and data processing efficiency by 25%</li>
+      <li>Mentored junior developers on Hyperion methodologies and calc-script optimization; championed DevOps practices to accelerate release cycles</li>
+    </ul>
+    <div class="cs-metrics">
+      <div class="cs-metric"><strong>~40%</strong><span>Reconciliation Reduced</span></div>
+      <div class="cs-metric"><strong>20%</strong><span>Forecast Accuracy ↑</span></div>
+      <div class="cs-metric"><strong>45%</strong><span>Data Reliability ↑</span></div>
+      <div class="cs-metric"><strong>25%</strong><span>Processing Efficiency ↑</span></div>
+      <div class="cs-metric"><strong>20%</strong><span>Budget Cycle ↓</span></div>
+    </div>
+  </div>
+
+  <div class="case-study reveal">
+    <div class="cs-header">
+      <span class="cs-client">Vistra Energy</span>
+      <span class="cs-industry">Energy · Texas</span>
+    </div>
+    <div class="cs-meta">On-Premise EPM Modernization & Automation</div>
+    <div class="cs-role">Consultant <span class="cs-role-badge">2015 – 2018</span></div>
+    <ul class="cs-bullets">
+      <li>Modernized legacy <span class="highlight">On-Premise EPM Planning applications</span> through full platform redesign and process automation — reducing manual processing time by ~30% and improving data accuracy for financial planning cycles</li>
+      <li>Executed full <span class="highlight">SDLC delivery</span> (requirements gathering, design, development, UAT, go-live); managed Hyperion environments including patching, upgrades, version migrations, and LCM artifact management across dev/test/prod</li>
+      <li>Built effective working relationships with US-based stakeholders, supporting <span class="highlight">DR planning, batch operations</span>, and translating technical findings into clear status documentation</li>
+      <li>Supported disaster recovery planning and backup/restore processes; executed artifact migrations using LCM tools ensuring system resilience and high availability</li>
+    </ul>
+    <div class="cs-metrics">
+      <div class="cs-metric"><strong>~30%</strong><span>Manual Processing ↓</span></div>
+      <div class="cs-metric"><strong>Full SDLC</strong><span>End-to-End Delivery</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="sec-label teal">Technical Expertise</div>
+  <h2 class="sec-title">EPM & Technology Stack</h2>
+  <div class="skills-matrix">
+    <div class="skill-block reveal">
+      <div class="sb-icon">🔶</div>
+      <div class="sb-title">Oracle EPM Cloud</div>
+      <div class="sb-tags">
+        <span class="sb-tag">PBCS</span><span class="sb-tag">EPBCS</span><span class="sb-tag">FCCS</span>
+        <span class="sb-tag">Data Management</span><span class="sb-tag">SmartView</span><span class="sb-tag">EPM Automate</span>
+        <span class="sb-tag">HFR</span><span class="sb-tag">Mgmt Reporting</span><span class="sb-tag">Smart Push</span>
+      </div>
+    </div>
+    <div class="skill-block reveal">
+      <div class="sb-icon">🏢</div>
+      <div class="sb-title">Oracle On-Premise</div>
+      <div class="sb-tags">
+        <span class="sb-tag">Hyperion Planning 11.2</span><span class="sb-tag">Essbase ASO/BSO</span>
+        <span class="sb-tag">FDMEE</span><span class="sb-tag">ODI</span><span class="sb-tag">DRM</span>
+        <span class="sb-tag">EPMA</span><span class="sb-tag">Calc Manager</span><span class="sb-tag">FR Studio</span>
+        <span class="sb-tag">LCM</span><span class="sb-tag">Shared Services</span>
+      </div>
+    </div>
+    <div class="skill-block reveal">
+      <div class="sb-icon">⚙️</div>
+      <div class="sb-title">Scripting & Development</div>
+      <div class="sb-tags">
+        <span class="sb-tag">MDX</span><span class="sb-tag">Calculation Scripts</span><span class="sb-tag">Business Rules</span>
+        <span class="sb-tag">MaxL</span><span class="sb-tag">ESSCMD</span><span class="sb-tag">Groovy</span>
+        <span class="sb-tag">Jython</span><span class="sb-tag">Shell/Batch</span>
+      </div>
+    </div>
+    <div class="skill-block reveal">
+      <div class="sb-icon">🔗</div>
+      <div class="sb-title">Data & Integration</div>
+      <div class="sb-tags">
+        <span class="sb-tag">SQL / PL-SQL</span><span class="sb-tag">Oracle ERP Cloud</span><span class="sb-tag">Fusion Apps</span>
+        <span class="sb-tag">PeopleSoft</span><span class="sb-tag">E-Business Suite</span>
+        <span class="sb-tag">Informatica</span><span class="sb-tag">ODI</span>
+      </div>
+    </div>
+    <div class="skill-block reveal">
+      <div class="sb-icon">☁️</div>
+      <div class="sb-title">Cloud & Infrastructure</div>
+      <div class="sb-tags">
+        <span class="sb-tag">OCI</span><span class="sb-tag">Microsoft Azure</span><span class="sb-tag">AWS</span>
+        <span class="sb-tag">CI/CD Pipelines</span><span class="sb-tag">DevOps</span>
+      </div>
+    </div>
+    <div class="skill-block reveal">
+      <div class="sb-icon">📊</div>
+      <div class="sb-title">Analytics & Reporting</div>
+      <div class="sb-tags">
+        <span class="sb-tag">Power BI</span><span class="sb-tag">Tableau</span>
+        <span class="sb-tag">Financial Reporting</span><span class="sb-tag">BI Reporting</span><span class="sb-tag">Data Validation</span>
+      </div>
+    </div>
+    <div class="skill-block reveal">
+      <div class="sb-icon">📋</div>
+      <div class="sb-title">PM & Methodologies</div>
+      <div class="sb-tags">
+        <span class="sb-tag">JIRA</span><span class="sb-tag">Confluence</span><span class="sb-tag">MS Project</span>
+        <span class="sb-tag">Smartsheet</span><span class="sb-tag">Advanced Excel</span>
+        <span class="sb-tag">Agile/Scrum</span><span class="sb-tag">SDLC</span><span class="sb-tag">ITIL</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- CORE COMPETENCIES -->
+<section class="section">
+  <div class="sec-label sky">Core Competencies</div>
+  <h2 class="sec-title">What I Bring</h2>
+  <div class="skills-matrix" style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));">
+    <div class="skill-block reveal" style="text-align:center; padding: 2rem 1.2rem;">
+      <div class="sb-icon" style="font-size:2rem;">🏗️</div>
+      <div class="sb-title">Technical Implementation & Software Delivery</div>
+    </div>
+    <div class="skill-block reveal" style="text-align:center; padding: 2rem 1.2rem;">
+      <div class="sb-icon" style="font-size:2rem;">📝</div>
+      <div class="sb-title">Requirements Analysis & Documentation</div>
+    </div>
+    <div class="skill-block reveal" style="text-align:center; padding: 2rem 1.2rem;">
+      <div class="sb-icon" style="font-size:2rem;">🤝</div>
+      <div class="sb-title">Client Management & Relationship Building</div>
+    </div>
+    <div class="skill-block reveal" style="text-align:center; padding: 2rem 1.2rem;">
+      <div class="sb-icon" style="font-size:2rem;">📢</div>
+      <div class="sb-title">Stakeholder Communication</div>
+    </div>
+    <div class="skill-block reveal" style="text-align:center; padding: 2rem 1.2rem;">
+      <div class="sb-icon" style="font-size:2rem;">🧩</div>
+      <div class="sb-title">Cross-Functional Collaboration</div>
+    </div>
+    <div class="skill-block reveal" style="text-align:center; padding: 2rem 1.2rem;">
+      <div class="sb-icon" style="font-size:2rem;">⚡</div>
+      <div class="sb-title">Process Improvement & Automation</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- CERTIFICATIONS -->
+<section class="section" id="certs">
+  <div class="sec-label amber">Credentials</div>
+  <h2 class="sec-title">Certifications</h2>
+  <div class="cert-grid">
+    <div class="cert-row reveal"><div class="cert-dot oracle">🔶</div><div class="cert-text"><h4>Oracle Cloud Planning Implementation Specialist</h4><span>Oracle · 2024</span></div></div>
+    <div class="cert-row reveal"><div class="cert-dot oracle">🔶</div><div class="cert-text"><h4>OCI Foundations Certified Associate</h4><span>Oracle</span></div></div>
+    <div class="cert-row reveal"><div class="cert-dot oracle">🔶</div><div class="cert-text"><h4>Oracle Essbase 11 Essentials</h4><span>Oracle</span></div></div>
+    <div class="cert-row reveal"><div class="cert-dot pm">📋</div><div class="cert-text"><h4>PMP Certified Project Manager</h4><span>Project Management Institute</span></div></div>
+    <div class="cert-row reveal"><div class="cert-dot agile">🔄</div><div class="cert-text"><h4>Certified Scrum Product Owner (CSPO)</h4><span>Scrum Alliance</span></div></div>
+    <div class="cert-row reveal"><div class="cert-dot agile">🔄</div><div class="cert-text"><h4>Certified Scrum Master (CSM)</h4><span>Scrum Alliance</span></div></div>
+    <div class="cert-row reveal"><div class="cert-dot pm">📋</div><div class="cert-text"><h4>ITIL Foundation v4</h4><span>IT Service Management</span></div></div>
+    <div class="cert-row reveal"><div class="cert-dot cloud">☁️</div><div class="cert-text"><h4>Microsoft Azure Fundamentals</h4><span>Microsoft</span></div></div>
+    <div class="cert-row reveal"><div class="cert-dot other">📐</div><div class="cert-text"><h4>ISB Business Analysis Foundation</h4><span>Indian School of Business</span></div></div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- AWARDS -->
+<section class="section" id="awards">
+  <div class="sec-label indigo">Recognition</div>
+  <h2 class="sec-title">Awards & Honors</h2>
+  <div class="awards-row">
+    <div class="award-tile reveal"><div class="award-emoji">🏆</div><h4>Accenture Excellence (ACE) Award</h4><p>Outstanding program delivery and operational impact</p></div>
+    <div class="award-tile reveal"><div class="award-emoji">⭐</div><h4>Accenture Tech Star</h4><p>Innovation and technical leadership in enterprise EPM</p></div>
+    <div class="award-tile reveal"><div class="award-emoji">🤝</div><h4>Mondelez Bravo Award</h4><p>Exceptional client collaboration and delivery excellence</p></div>
+    <div class="award-tile reveal"><div class="award-emoji">🎓</div><h4>TechStar Mentor</h4><p>Mentoring developers and fostering team growth</p></div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- EDUCATION -->
+<section class="section">
+  <div class="sec-label sky">Education</div>
+  <h2 class="sec-title">Academic Background</h2>
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div class="sb-icon">🎓</div>
+      <h4>Executive General Management Program (EGMP)</h4>
+      <p>Indian Institute of Management Calcutta (IIMC)</p>
+      <span class="edu-year">2021 – 2022</span>
+    </div>
+    <div class="edu-card reveal">
+      <div class="sb-icon">📐</div>
+      <h4>B.Tech, Electrical & Electronics Engineering</h4>
+      <p>JNTUH, Hyderabad · GPA: 3.7 / 4.0</p>
+      <span class="edu-year">2011 – 2015</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-box reveal">
+    <h2>Let's Build Your EPM Future</h2>
+    <p>Open to travel up to 50% · Flexible on US location · Work authorized (EAD, valid through 2028)</p>
+    <div class="cta-links">
+      <a href="mailto:saisruthikondamadugula@gmail.com" class="cta-btn cta-btn-primary">✉ Get in Touch</a>
+      <a href="tel:+12065965353" class="cta-btn cta-btn-outline">☎ (206) 596-5353</a>
+      <a href="https://linkedin.com/in/saisruthikondamadugula" target="_blank" class="cta-btn cta-btn-outline">LinkedIn →</a>
+    </div>
+  </div>
+</div>
+
+<footer><p>Seattle, WA · © 2025 Sruthi Kondamadugula</p></footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
